@@ -1,0 +1,17 @@
+<div id="search-component">
+    <label for="search-box">Hero Search</label>
+    <!--as user types in search box, input event-binding calls component's search method w/ new search value-->
+    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+    <ul class="search-result">
+        <!--heroes$ => $ indicates that the list is an observable (not an array)
+            ngFor can't actually do anything w/ an Observable, so use pipe (|) w/ 
+            async (i.e. use Angular's AsyncPipe) to subscribe to observable directly 
+            and you won't have to in component class-->
+        <li *ngFor="let hero of heroes$ | async" >
+        <a routerLink="/detail/{{hero.id}}">
+            {{hero.name}}
+        </a>
+        </li>
+    </ul>
+</div>
